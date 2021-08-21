@@ -183,18 +183,18 @@ std::string return_date_time() {
 
 void rate_log() {
 
-	std::cout << "You selected: Rate My Nutrition" << std::endl;
+	std::cout << "RATE MY NUTRITION\n" << std::endl;
 	
 	//take number from enter_num()
 	int num = enter_num();
 
 	//read in description of why day was rated as specific number
 	std::string str;;
-  	std::cout << "Please describe why you rated your day as a " << num << "? ";
+  	std::cout << "\nPlease describe why you rated your day as a " << num << "? ";
   	getline (std::cin, str);
 
   	//save str to a file with the date and time of entry as a log
-  	std::cout << "Save complete" << std::endl;
+  	std::cout << "\nSaving..." << std::endl;
   	std::ofstream file;
   	file.open("log.txt", std::ios_base::app);
   	file << return_date_time() << " " << num << ": " << str << std::endl;

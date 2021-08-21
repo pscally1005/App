@@ -50,6 +50,8 @@ bool check_metric() {
         unit = std::stoi(unit_str);
     }
 
+    std::cout << std::endl;
+
     if(unit == 1) { return false; }     //return false if not metric
     else { return true; }               //return true if metric
 
@@ -57,7 +59,7 @@ bool check_metric() {
 
 void bmi() {
 
-	std::cout << "You selected: BMI Calculator" << std::endl;
+	std::cout << "BMI CALCULATOR\n" << std::endl;
 
     bool is_metric = check_metric();
 
@@ -118,7 +120,7 @@ void bmi() {
         digits++;
     }
 
-    std::cout << "Your BMI is: " << std::setprecision(digits+2) << bmi << std::endl;
+    std::cout << "\nYour BMI is: " << std::setprecision(digits+2) << bmi << std::endl;
 
     if(bmi < 18.5) { std::cout << "You are in the underweight range" << std::endl; }
     else if(bmi >= 18.5 && bmi < 25) { std::cout << "You are in the normal weight range" << std::endl; }

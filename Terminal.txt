@@ -1,8 +1,7 @@
-cda: cd /mnt/c/Users/Paul/Documents/App
-compile: x86_64-w64-mingw32-g++ -g *.cpp -o app.exe -Wall -Wextra -static-libstdc++ -static-libgcc
-run: ./app.out
-
-alias [alias name] to check the commands
+Basic: 
+	cda: cd /mnt/c/Users/Paul/Documents/App
+	compile: x86_64-w64-mingw32-g++ -g *.cpp -o app.exe -Wall -Wextra -static-libstdc++ -static-libgcc
+	run: ./app.out
 
 Making new alias:
 	Check if the command already exits by doing "alias [name]" or "which [name]"
@@ -11,7 +10,8 @@ Making new alias:
 	Pull up all aliases with "alias -p"
 
 Github:
-	git add .
-	git commit -m "[todays date]"
-	git push
-	enter username (pscally1005) and token (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)
+	ga: git add .
+	gc: git commit -m "[todays date]"
+	gp: git push
+	Enter username (pscally1005) and token (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)
+	Use "git status" to check the status of the git

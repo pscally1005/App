@@ -11,6 +11,7 @@
 #include <sstream>
 #include "rate_log.h"
 #include "bmi.h"
+#include "exercise_tips.h"
 
 typedef unsigned int uint;
 
@@ -29,7 +30,8 @@ int screen_select() {
 
 	std::cout << "1: Rate My Nutrition" << std::endl;
 	std::cout << "2: BMI Calculator" << std::endl;
-	std::cout << "3: Quit" << std::endl;
+	std::cout << "3: Exercise Tips" << std::endl;
+	std::cout << "4: Quit" << std::endl;
 	std::cout << std::endl;
 	std::cout << "Enter a number to select: ";
 
@@ -43,7 +45,8 @@ int screen_select() {
         
 		std::cout << "1: Rate My Nutrition" << std::endl;
 		std::cout << "2: BMI Calculator" << std::endl;
-		std::cout << "3: Quit" << std::endl;
+		std::cout << "3: Exercise Tips" << std::endl;
+		std::cout << "4: Quit" << std::endl;
 		std::cout << std::endl;
 		std::cout << "Enter a number to select: ";
 
@@ -52,13 +55,14 @@ int screen_select() {
 
     num = std::stoi(num_str);
 
-    while(num < 1 || num > 3) {
+    while(num < 1 || num > 4) {
     	std::cerr << "ERROR: Improper input.  Please try again" << std::endl;
         std::cout << std::endl;
 
 		std::cout << "1: Rate My Nutrition" << std::endl;
 		std::cout << "2: BMI Calculator" << std::endl;
-		std::cout << "3: Quit" << std::endl;
+		std::cout << "3: Exercise Tips" << std::endl;
+		std::cout << "4: Quit" << std::endl;
 		std::cout << std::endl;
 		std::cout << "Enter a number to select: ";
 
@@ -87,6 +91,7 @@ bool back_to_main_screen() {
 
 	std::cout << std::endl;
 
+	system("cls");
 	if(input == "y") { return true; }
 	else { return false; }
 
@@ -101,6 +106,7 @@ int main(/*int argc, char* argv[]*/) {
 
 		bool stay = true;
 		while(stay == true) {
+			system("cls");
 			rate_log();
 			if(back_to_main_screen() == true) { stay = false; main(); }
 			else { continue; }
@@ -110,12 +116,23 @@ int main(/*int argc, char* argv[]*/) {
 
 		bool stay = true;
 		while(stay == true) {
+			system("cls");
 			bmi();
 			if(back_to_main_screen() == true) { stay = false; main(); }
 			else { continue; }
 		}
 
 	} else if(select == 3) {
+
+		bool stay = true;
+		while(stay == true) {
+			system("cls");
+			exercise_tips();
+			if(back_to_main_screen() == true) { stay = false; main(); }
+			else { continue; }
+		}
+
+	} else if(select == 4) {
 		std::cout << "Quitting Now" << std::endl;
 		exit(1);
 	}
