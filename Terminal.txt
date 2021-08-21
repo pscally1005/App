@@ -5,5 +5,13 @@ run: ./app.out
 alias [alias name] to check the commands
 
 Making new alias:
+	Check if the command already exits by doing "alias [name]" or "which [name]"
 	echo "alias [name]='[command]'" >> ~/.bashrc
 	source ~/.bashrc
+	Pull up all aliases with "alias -p"
+
+Github:
+	git add .
+	git commit -m "[todays date]"
+	git push
+	enter username (pscally1005) and token (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)
