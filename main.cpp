@@ -15,6 +15,7 @@
 
 typedef unsigned int uint;
 
+//mainscreen header
 void title() {
 
 	std::cout << "#####################" << std::endl;
@@ -26,123 +27,110 @@ void title() {
 
 }
 
-int screen_select() {
+//screen options
+void options() {
 
 	std::cout << "1: Rate My Nutrition" << std::endl;
 	std::cout << "2: BMI Calculator" << std::endl;
 	std::cout << "3: Exercise Tips" << std::endl;
-	std::cout << "4: Quit" << std::endl;
+	std::cout << "0: Quit" << std::endl;
 	std::cout << std::endl;
+}
+
+//prints the previous information from the main screen if screen input is invalid
+void print_prev_main() {
+
+	system("cls");
+	title();
+	options();
+
+}
+
+//returns int of selected screen
+int screen_select() {
+
+	//main screen options
+	options();
 	std::cout << "Enter a number to select: ";
 
 	std::string num_str;
-	std::getline (std::cin, num_str);
+	std::getline(std::cin, num_str);
 	int num = -1;
 
-	while(check_number(num_str) == false) {
-		std::cerr << "ERROR: Improper input.  Please try again" << std::endl;
-        std::cout << std::endl;
-        
-		std::cout << "1: Rate My Nutrition" << std::endl;
-		std::cout << "2: BMI Calculator" << std::endl;
-		std::cout << "3: Exercise Tips" << std::endl;
-		std::cout << "4: Quit" << std::endl;
-		std::cout << std::endl;
+	//if input is improper (not a number)
+	while(num_str == "" || check_number(num_str) == false) {
+		print_prev_main();
+		std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
 		std::cout << "Enter a number to select: ";
-
         std::getline(std::cin, num_str);
     }
 
+    //convert input from string to int
     num = std::stoi(num_str);
 
-    while(num < 1 || num > 4) {
-    	std::cerr << "ERROR: Improper input.  Please try again" << std::endl;
-        std::cout << std::endl;
-
-		std::cout << "1: Rate My Nutrition" << std::endl;
-		std::cout << "2: BMI Calculator" << std::endl;
-		std::cout << "3: Exercise Tips" << std::endl;
-		std::cout << "4: Quit" << std::endl;
-		std::cout << std::endl;
-		std::cout << "Enter a number to select: ";
-
+    //if input is improper (not a valid number)
+    //also checks if new imput is a number or not
+    while(num < 0 || num > 3) {
+    	print_prev_main();
+    	std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
+    	std::cout << "Enter a number to select: ";
         std::getline(std::cin, num_str);
-        if(check_number(num_str) == false) { continue; }
+        if(num_str == "" || check_number(num_str) == false) { continue; }
         num = std::stoi(num_str);
     }
 
 	std::cout << std::endl;
+
+	//return correct input to main
 	return num;
 	
 }
 
-bool back_to_main_screen() {
-
-	std::cout << std::endl;
-	std::cout << "Do you want to return to the main screen (y/n)? ";
-	std::string input;
-	getline (std::cin, input);
-
-	while(input != "y" && input != "n") {
-		std::cerr << "ERROR: Improper input, please try again" << std::endl;
-		std::cout << "Do you want to return to the main screen (y/n)? ";
-		getline (std::cin, input);
-	}
-
-	std::cout << std::endl;
-
-	system("cls");
-	if(input == "y") { return true; }
-	else { return false; }
-
-}
-
+//main code
 int main(/*int argc, char* argv[]*/) {
 
+	system("cls");
 	title();
 	int select = screen_select();
 
+	//if user inputs 1 (rate_log)
 	if(select == 1) { 
 
-		bool stay = true;
-		while(stay == true) {
-			system("cls");
-			rate_log();
-			if(back_to_main_screen() == true) { stay = false; main(); }
-			else { continue; }
-		}
+		system("cls");
+		rate_log();
+		main();
 
+	//if user inputs 2 (bmi)
 	} else if(select == 2) {
 
-		bool stay = true;
-		while(stay == true) {
-			system("cls");
-			bmi();
-			if(back_to_main_screen() == true) { stay = false; main(); }
-			else { continue; }
-		}
+		system("cls");
+		bmi_();
+		main();
 
+	//if user inputs 3 (exercise_tips)
 	} else if(select == 3) {
 
-		bool stay = true;
-		while(stay == true) {
-			system("cls");
-			exercise_tips();
-			if(back_to_main_screen() == true) { stay = false; main(); }
-			else { continue; }
-		}
+		system("cls");
+		exercise_tips();
+		main();
 
-	} else if(select == 4) {
+	//if user inputs 0 (quit)
+	} else if(select == 0) {
+
 		std::cout << "Quitting Now" << std::endl;
-		exit(1);
+		return 1;
+
 	}
+
+	//shouldn't ever run but just in case (somehow inproper input make it past screen_select() )
 	else {
 
-		std::cerr << "ERROR: Improper Input" << std::endl;
+		std::cerr << "ERROR: \"" << select << "\" is not a proper input.  Please try again" << std::endl;
 		return 0;
 
 	}
 
+	//end of code
 	return 1;
 
 }

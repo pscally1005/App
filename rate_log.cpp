@@ -12,6 +12,14 @@
 
 typedef unsigned int uint;
 
+void after_num(int num) {
+
+    system("cls");
+    std::cout << "RATE MY NUTRITION\n" << std::endl;
+    std::cout << "Rate your nutrition today from 1 to 5: " << num << std::endl;
+
+}
+
 //enter a num from 1 to 5, return the inputted number or -1 if error
 int enter_num() {
 
@@ -20,24 +28,31 @@ int enter_num() {
 	std::getline(std::cin, num_str);
     int num = -1;
 
-    while(check_number(num_str) == false) {
-        std::cout << std::endl;
-        std::cerr << "ERROR: Improper input.  Please try again" << std::endl;
+    //if input is improper (not a number)
+    while(num_str == "" || check_number(num_str) == false) {
+        system("cls");
+        std::cout << "RATE MY NUTRITION\n" << std::endl;
+        std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
         std::getline(std::cin, num_str);
     }
 
+    //converts input string to int
     num = std::stoi(num_str);
 
+    //if input is improper (wrong number)
+    //also checks if input is a number
     while(num < 1 || num > 5) {
-        std::cout << std::endl;
-        std::cerr << "ERROR: Improper input.  Please try again" << std::endl;
+        system("cls");
+        std::cout << "RATE MY NUTRITION\n" << std::endl;
+        std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again\n" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
         std::getline(std::cin, num_str);
-        if(check_number(num_str) == false) { continue; }
+        if(num_str == "" || check_number(num_str) == false) { continue; }
         num = std::stoi(num_str);
     }
 
+    //returns correct input
 	return num;
 }
 
@@ -177,20 +192,56 @@ std::string return_date_time() {
     //make formatted date and time string (ex: [08/14/21, 03:01pm])
     std::string formatted_string = "[" + month + "/" + date + "/" + year + ", " + time + "]";\
 
+    //returns the date and time in the format I want, used in log.txt
     return formatted_string;
 
 }
 
+//prints previous screen information if invalid input on return screen
+void print_prev(int num, std::string desc) {
+
+    after_num(num);
+    std::cout << "\nPlease describe why you rated your day as a \"" << num << "\"? " << desc << std::endl;
+    std::cout << "\nSaving\n" << std::endl;
+
+}
+
+//returning to main screen
+bool back_to_main_screen_rl(int num, std::string desc) {
+
+    std::cout << std::endl;
+    std::cout << "Do you want to return to the main screen (y/n)? ";
+    std::string input;
+    getline (std::cin, input);
+
+    //checks to make sure input is only "y" or "n"
+    while(input != "y" && input != "n") {
+        print_prev(num, desc);
+        std::cerr << "ERROR: \"" << input << "\" is not a proper input.  Please try again" << std::endl;
+        std::cout << "Do you want to return to the main screen (y/n)? ";
+        getline (std::cin, input);
+    }
+
+    std::cout << std::endl;
+
+    system("cls");
+    if(input == "y") { return true; }
+    else { return false; }
+
+}
+
+//rate log main code
 void rate_log() {
 
 	std::cout << "RATE MY NUTRITION\n" << std::endl;
 	
 	//take number from enter_num()
 	int num = enter_num();
+    after_num(num);
 
 	//read in description of why day was rated as specific number
 	std::string str;;
-  	std::cout << "\nPlease describe why you rated your day as a " << num << "? ";
+  	std::cout << "\nPlease describe why you rated your day as a \"" << num << "\"? ";
   	getline (std::cin, str);
 
   	//save str to a file with the date and time of entry as a log
@@ -199,5 +250,8 @@ void rate_log() {
   	file.open("log.txt", std::ios_base::app);
   	file << return_date_time() << " " << num << ": " << str << std::endl;
   	file.close();
+
+    bool back = back_to_main_screen_rl(num, str);
+    if(back == false) { rate_log(); }
 
 }
