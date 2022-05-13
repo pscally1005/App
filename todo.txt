@@ -1,3 +1,0 @@
-List of stuff that currently needs to be worked on
-
-- README
