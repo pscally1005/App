@@ -1,15 +1,24 @@
 /*
-	This is the code for the rate_log, which lets you rate your nutrition for the day from 1-5
-	This gets saved to a log file along with the date and time of the entry
+	This is the code for the bmi, which lets you calculator your bmi
 */
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <conio.h>
 #include "bmi.h"
 
 typedef unsigned int uint;
+
+//prints the top header text
+void print_top_BMI() {
+
+    system("cls");
+    std::cout << "BMI CALCULATOR\n" << std::endl;
+    std::cout << "This section will let you enter your height and weight and will calculate your BMI\n" << std::endl;
+
+}
 
 //https://www.tutorialspoint.com/cplusplus-program-to-check-if-input-is-an-integer-or-a-string
 bool check_number(std::string str) {
@@ -21,69 +30,61 @@ bool check_number(std::string str) {
         return true;
 }
 
-//returns true if user selects metric units, false otherwise
-bool check_metric() {
+//prints the text for unit selection
+void unit_select_text() {
 
-    //enter the number for the unit
     std::cout << "What units do you use?" << std::endl;
     std::cout << "1: Customary (in/lbs)" << std::endl;
     std::cout << "2: Metric (cm/kg)" << std::endl;
     std::cout << std::endl;
-    std::cout << "Enter a number to select: ";
 
-    std::string unit_str;
+}
+
+//returns true if user selects metric units, false otherwise
+bool check_metric_BMI() {
+
+    unit_select_text();
+    std::cout << "Enter a number to select a unit: ";
+
+    /*std::string unit_str;
     std::getline(std::cin, unit_str);
     int unit = -1;
 
     //if input is not correct
-    while(unit_str == "" || check_number(unit_str) == false) {
-        system("cls");
-        std::cout << "BMI CALCULATOR\n" << std::endl;
-        std::cout << "What units do you use?" << std::endl;
-        std::cout << "1: Customary (in/lbs)" << std::endl;
-        std::cout << "2: Metric (cm/kg)" << std::endl;
-        std::cout << std::endl;
+    while(unit_str != "1" && unit_str != "2") {
+        print_top_BMI();
+        unit_select_text();
         std::cerr << "ERROR: \"" << unit_str << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Enter a number to select: ";
+        std::cout << "Enter a number to select a unit: ";
         std::getline(std::cin, unit_str);
     }
 
-    unit = std::stof(unit_str);
-
-    //if input is not correct
-    while(unit < 1 || unit > 2) {
-        system("cls");
-        std::cout << "BMI CALCULATOR\n" << std::endl;
-        std::cout << "What units do you use?" << std::endl;
-        std::cout << "1: Customary (in/lbs)" << std::endl;
-        std::cout << "2: Metric (cm/kg)" << std::endl;
-        std::cout << std::endl;
-        std::cerr << "ERROR: \"" << unit_str << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Enter a number to select: ";
-        std::getline(std::cin, unit_str);
-        if(unit_str == "" || check_number(unit_str) == false) { continue; }
-        unit = std::stoi(unit_str);
-    }
-
+    unit = std::stoi(unit_str);
     std::cout << std::endl;
 
     if(unit == 1) { return false; }     //return false if not metric
-    else { return true; }               //return true if metric
+    else { return true; }               //return true if metric*/
+
+    char unit = getch();
+    while(unit != '1' && unit != '2') {
+        print_top_BMI();
+        unit_select_text();
+        std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
+        std::cout << "Enter a number to select a unit: ";
+        unit = getch();
+    }
+
+    if(unit == '1') { return false; }     //return false if not metric
+    else { return true; }               //return true if metric*/
 
 }
 
 //clears error messages after correct unit is entered
 void print_before_height(bool is_metric) {
 
-    system("cls");
-    std::cout << "BMI CALCULATOR\n" << std::endl;
-
-    //reprint out unit information
-    std::cout << "What units do you use?" << std::endl;
-    std::cout << "1: Customary (in/lbs)" << std::endl;
-    std::cout << "2: Metric (cm/kg)" << std::endl;
-    std::cout << std::endl;
-    std::cout << "Enter a number to select: ";
+    print_top_BMI();
+    unit_select_text();
+    std::cout << "Enter a number to select a unit: ";
 
     if(is_metric == false) { std::cout << "1" << std::endl; }
     else { std::cout << "2" << std::endl; }
@@ -106,7 +107,10 @@ float height(bool is_metric) {
         print_before_height(is_metric);
         std::cout << std::endl;
         std::cerr << "ERROR: \"" << height_str << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Enter your height in inches: ";
+        std::cout << "Enter your height in ";
+        if(is_metric == false) { std::cout << "inches: "; }
+        else { std::cout << "centimeters: "; }
+
         std::getline(std::cin, height_str);
     }
 
@@ -154,7 +158,10 @@ float weight(bool is_metric, float h) {
         print_before_weight(is_metric, h);
         std::cout << std::endl;
         std::cerr << "ERROR: \"" << weight_str << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Enter your weight in pounds: ";
+        std::cout << "Enter your weight in ";
+        if(is_metric == false) { std::cout << "pounds: "; }
+        else { std::cout << "kilograms: "; }
+
         std::getline(std::cin, weight_str);
     }
 
@@ -185,50 +192,12 @@ void print_after_weight(bool is_metric, float h, float w) {
 
 }
 
-void print_prev(bool is_metric, float h, float w, float bmi, int digits) {
-
-    print_after_weight(is_metric, h, w);
-
-    //prints bmi
-    std::cout << "\nYour BMI is: " << std::setprecision(digits+2) << bmi << std::endl;
-
-    //weight ranges
-    if(bmi < 18.5) { std::cout << "You are in the underweight range\n" << std::endl; }
-    else if(bmi >= 18.5 && bmi < 25) { std::cout << "You are in the normal weight range\n" << std::endl; }
-    else if(bmi >= 25 && bmi < 30) { std::cout << "You are in the overweight weight range\n" << std::endl; }
-    else { std::cout << "You are in the obese weight range\n" << std::endl; }
-
-}
-
-bool back_to_main_screen_b(bool is_metric, float h, float w, float bmi, int digits) {
-
-    std::cout << std::endl;
-    std::cout << "Do you want to return to the main screen (y/n)? ";
-    std::string input;
-    getline (std::cin, input);
-
-    //checks to make sure input is only "y" or "n"
-    while(input != "y" && input != "n") {
-        print_prev(is_metric, h, w, bmi, digits);
-        std::cerr << "ERROR: \"" << input << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Do you want to return to the main screen (y/n)? ";
-        getline (std::cin, input);
-    }
-
-    std::cout << std::endl;
-
-    system("cls");
-    if(input == "y") { return true; }
-    else { return false; }
-
-}
-
 //bmi main code
 void bmi_() {
 
-	std::cout << "BMI CALCULATOR\n" << std::endl;
+    print_top_BMI();
 
-    bool is_metric = check_metric();
+    bool is_metric = check_metric_BMI();
     print_before_height(is_metric);
     float h = height(is_metric);
     print_before_weight(is_metric, h);
@@ -257,7 +226,16 @@ void bmi_() {
     else if(bmi >= 25 && bmi < 30) { std::cout << "You are in the overweight weight range" << std::endl; }
     else { std::cout << "You are in the obese weight range" << std::endl; }
 
-    bool back = back_to_main_screen_b(is_metric, h, w, bmi, digits);
-    if(back == false) { bmi_(); }
+    /*bool back = back_to_main_screen_b(is_metric, h, w, bmi, digits);
+    if(back == false) { bmi_(); }*/
+
+    /*std::string exit;
+    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    std::getline(std::cin, exit);
+    if(exit == "y" || exit == "Y") { bmi_(); }*/
+
+    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    char exit = getch();
+    if(exit == 'y' || exit == 'Y') { bmi_(); }
 
 }

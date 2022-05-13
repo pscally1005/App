@@ -8,30 +8,40 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
+#include <conio.h>
 #include "rate_log.h"
 
 typedef unsigned int uint;
 
-void after_num(int num) {
+//prints the top header information
+void print_top_RL() {
 
     system("cls");
     std::cout << "RATE MY NUTRITION\n" << std::endl;
+    std::cout << "This section will let you rate your daily nutrition and why you feel this way.  The results will be saved to a log file\n" << std::endl;
+
+}
+
+//prints out header information up until after entering the num
+void after_num(/*int*/ char num) {
+
+    print_top_RL();
     std::cout << "Rate your nutrition today from 1 to 5: " << num << std::endl;
 
 }
 
 //enter a num from 1 to 5, return the inputted number or -1 if error
-int enter_num() {
+/*int*/ char enter_num() {
 
 	std::string num_str;
 	std::cout << "Rate your nutrition today from 1 to 5: ";
-	std::getline(std::cin, num_str);
+
+	/*std::getline(std::cin, num_str);
     int num = -1;
 
     //if input is improper (not a number)
     while(num_str == "" || check_number(num_str) == false) {
-        system("cls");
-        std::cout << "RATE MY NUTRITION\n" << std::endl;
+        print_top_RL();
         std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
         std::getline(std::cin, num_str);
@@ -43,8 +53,7 @@ int enter_num() {
     //if input is improper (wrong number)
     //also checks if input is a number
     while(num < 1 || num > 5) {
-        system("cls");
-        std::cout << "RATE MY NUTRITION\n" << std::endl;
+        print_top_RL();
         std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again\n" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
         std::getline(std::cin, num_str);
@@ -52,8 +61,20 @@ int enter_num() {
         num = std::stoi(num_str);
     }
 
+    after_num(num);
+
     //returns correct input
-	return num;
+	return num;*/
+
+    char input = getch();
+    while(input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
+        print_top_RL();
+        std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
+        std::cout << "Rate your nutrition today from 1 to 5: ";
+        input = getch();
+    }
+    after_num(input);
+    return input;
 }
 
 //returns formatted date and time
@@ -197,47 +218,13 @@ std::string return_date_time() {
 
 }
 
-//prints previous screen information if invalid input on return screen
-void print_prev(int num, std::string desc) {
-
-    after_num(num);
-    std::cout << "\nPlease describe why you rated your day as a \"" << num << "\"? " << desc << std::endl;
-    std::cout << "\nSaving\n" << std::endl;
-
-}
-
-//returning to main screen
-bool back_to_main_screen_rl(int num, std::string desc) {
-
-    std::cout << std::endl;
-    std::cout << "Do you want to return to the main screen (y/n)? ";
-    std::string input;
-    getline (std::cin, input);
-
-    //checks to make sure input is only "y" or "n"
-    while(input != "y" && input != "n") {
-        print_prev(num, desc);
-        std::cerr << "ERROR: \"" << input << "\" is not a proper input.  Please try again" << std::endl;
-        std::cout << "Do you want to return to the main screen (y/n)? ";
-        getline (std::cin, input);
-    }
-
-    std::cout << std::endl;
-
-    system("cls");
-    if(input == "y") { return true; }
-    else { return false; }
-
-}
-
 //rate log main code
 void rate_log() {
 
-	std::cout << "RATE MY NUTRITION\n" << std::endl;
+    print_top_RL();
 	
 	//take number from enter_num()
-	int num = enter_num();
-    after_num(num);
+	/*int*/ char num = enter_num();
 
 	//read in description of why day was rated as specific number
 	std::string str;;
@@ -251,7 +238,13 @@ void rate_log() {
   	file << return_date_time() << " " << num << ": " << str << std::endl;
   	file.close();
 
-    bool back = back_to_main_screen_rl(num, str);
-    if(back == false) { rate_log(); }
+    /*std::string exit;
+    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    std::getline(std::cin, exit);
+    if(exit == "y" || exit == "Y") { rate_log(); }*/
+
+    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    char exit = getch();
+    if(exit == 'y' || exit == 'Y') { rate_log(); }
 
 }

@@ -10,21 +10,22 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
+#include <conio.h>
+
+//prints the top header information
+void print_top_RL();
 
 //returns true if string is a number
 bool check_number(std::string str);
 
+//prints out header information up until after entering the num
+void after_num(int num);
+
 //enter a num from 1 to 5, return the inputted number or -1 if error
-int enter_num();
+/*int*/ char enter_num();
 
 //returns formatted date and time
 std::string return_date_time();
-
-//prints all the previos information, used if wrong input is put for back_to_main_screen_rl
-void print_prev(int num, std::string desc);
-
-//back_to_main_screen specific to rate_log
-bool back_to_main_screen_rl();
 
 //essentially main function for rate_log, code for the whole screen
 void rate_log();

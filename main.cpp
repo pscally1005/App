@@ -9,9 +9,12 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
+#include <conio.h>
 #include "rate_log.h"
 #include "bmi.h"
-#include "exercise_tips.h"
+#include "nutrition.h"
+#include "pace.h"
+#include "splits.h"
 
 typedef unsigned int uint;
 
@@ -32,8 +35,10 @@ void options() {
 
 	std::cout << "1: Rate My Nutrition" << std::endl;
 	std::cout << "2: BMI Calculator" << std::endl;
-	std::cout << "3: Exercise Tips" << std::endl;
-	std::cout << "0: Quit" << std::endl;
+	std::cout << "3: Nutrition & Exercise Tips" << std::endl;
+	std::cout << "4: Pace Calculator" << std::endl;
+	std::cout << "5: Split Calculator" << std::endl;
+	std::cout << "X: Quit" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -47,15 +52,19 @@ void print_prev_main() {
 }
 
 //returns int of selected screen
-int screen_select() {
+/*int*/ char screen_select() {
 
 	//main screen options
 	options();
 	std::cout << "Enter a number to select: ";
 
-	std::string num_str;
+	/*std::string num_str;
 	std::getline(std::cin, num_str);
 	int num = -1;
+
+	if(num_str == "X" || num_str == "x") {
+		return 0;
+	}
 
 	//if input is improper (not a number)
 	while(num_str == "" || check_number(num_str) == false) {
@@ -63,6 +72,10 @@ int screen_select() {
 		std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
 		std::cout << "Enter a number to select: ";
         std::getline(std::cin, num_str);
+
+        if(num_str == "X" || num_str == "x") {
+			return 0;
+		}
     }
 
     //convert input from string to int
@@ -70,11 +83,16 @@ int screen_select() {
 
     //if input is improper (not a valid number)
     //also checks if new imput is a number or not
-    while(num < 0 || num > 3) {
+    while(num < 1 || num > 5) {
     	print_prev_main();
     	std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
     	std::cout << "Enter a number to select: ";
         std::getline(std::cin, num_str);
+
+        if(num_str == "X" || num_str == "x") {
+			return 0;
+		}
+
         if(num_str == "" || check_number(num_str) == false) { continue; }
         num = std::stoi(num_str);
     }
@@ -82,42 +100,66 @@ int screen_select() {
 	std::cout << std::endl;
 
 	//return correct input to main
-	return num;
-	
+	return num;*/
+
+	char input = getch();
+	while(input != 'x' && input != 'X' && input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
+		print_prev_main();
+		std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
+		std::cout << "Enter a number to select: ";
+		input = getch();
+	}
+	return input;
+
 }
 
 //main code
 int main(/*int argc, char* argv[]*/) {
 
 	system("cls");
+	system("cls");
 	title();
-	int select = screen_select();
+	/*int*/ char select = screen_select();
 
 	//if user inputs 1 (rate_log)
-	if(select == 1) { 
+	if(select == '1') { 
 
 		system("cls");
 		rate_log();
 		main();
 
 	//if user inputs 2 (bmi)
-	} else if(select == 2) {
+	} else if(select == '2') {
 
 		system("cls");
 		bmi_();
 		main();
 
 	//if user inputs 3 (exercise_tips)
-	} else if(select == 3) {
+	} else if(select == '3') {
 
 		system("cls");
-		exercise_tips();
+		nutrition();
+		main();
+
+	//if the user inputs 4 (pace)
+	} else if(select == '4') {
+
+		system("cls");
+		pace_calculator();
+		main();
+
+	//if the user inputs 5 (splits)
+	} else if(select == '5') {
+
+		system("cls");
+		splits_();
 		main();
 
 	//if user inputs 0 (quit)
-	} else if(select == 0) {
+	} else if(select == 'x' || select == 'X') {
 
-		std::cout << "Quitting Now" << std::endl;
+		system("cls");
 		return 1;
 
 	}
@@ -125,7 +167,7 @@ int main(/*int argc, char* argv[]*/) {
 	//shouldn't ever run but just in case (somehow inproper input make it past screen_select() )
 	else {
 
-		std::cerr << "ERROR: \"" << select << "\" is not a proper input.  Please try again" << std::endl;
+		std::cerr << "Achievement unlocked: How did we get here?" << std::endl;
 		return 0;
 
 	}
