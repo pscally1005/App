@@ -9,7 +9,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-#include <conio.h>
+#include <cstdio>
 
 //prints the top header text
 void print_top_BMI();

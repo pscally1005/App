@@ -10,7 +10,7 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
-#include <conio.h>
+#include <cstdio>
 
 //prints the top header information
 void print_top_RL();

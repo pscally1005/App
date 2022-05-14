@@ -10,7 +10,7 @@
 #include <fstream>
 #include <iomanip>
 #include <vector>
-#include <conio.h>
+#include <cstdio>
 
 //prints the first few lines of the screen
 void print_top();

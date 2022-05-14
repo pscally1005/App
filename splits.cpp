@@ -8,7 +8,7 @@
 #include <fstream>
 #include <iomanip>
 #include <vector>
-#include <conio.h>
+#include <cstdio>
 #include "pace.h"
 
 typedef unsigned int uint;
@@ -16,7 +16,7 @@ typedef unsigned int uint;
 //prints the first few lines of the screen
 void print_top() {
 
-	system("cls");
+	system("clear");
 	std::cout << "SPLIT CALCULATOR" << std::endl;
 	std::cout << "\nThis section will give you a prompt to enter a pace (in min/mi or min/km), and will give you your splits" << std::endl;
 
@@ -45,14 +45,14 @@ bool check_metric_SPLITS() {
 
     unit = std::stoi(unit_str);*/
 
-    char unit = getch();
+    char unit = getchar();
     while(unit != '1' && unit != '2') {
         print_top();
         std::cout << std::endl;
         print_units();
         std::cerr << "\nERROR: Not a proper input.  Please try again" << std::endl;
         std::cout << "Enter a number to select a unit: ";
-        unit = getch();
+        unit = getchar();
     }
 
     print_top();
@@ -288,7 +288,7 @@ void splits_() {
     if(exit == "y" || exit == "Y") { splits_(); }*/
 
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
-    char exit = getch();
+    char exit = getchar();
     if(exit == 'y' || exit == 'Y') { splits_(); }
 
 }

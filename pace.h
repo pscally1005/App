@@ -9,7 +9,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-#include <conio.h>
+#include <cstdio>
 
 //returns true if string is a number
 bool check_number(std::string str);

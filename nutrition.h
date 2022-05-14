@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <string>
-#include <conio.h>
+#include <cstdio>
 
 //prints header of screen
 void print_top_NE();

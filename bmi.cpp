@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-#include <conio.h>
+#include <cstdio>
 #include "bmi.h"
 
 typedef unsigned int uint;
@@ -14,7 +14,7 @@ typedef unsigned int uint;
 //prints the top header text
 void print_top_BMI() {
 
-    system("cls");
+    system("clear");
     std::cout << "BMI CALCULATOR\n" << std::endl;
     std::cout << "This section will let you enter your height and weight and will calculate your BMI\n" << std::endl;
 
@@ -65,13 +65,13 @@ bool check_metric_BMI() {
     if(unit == 1) { return false; }     //return false if not metric
     else { return true; }               //return true if metric*/
 
-    char unit = getch();
+    char unit = getchar();
     while(unit != '1' && unit != '2') {
         print_top_BMI();
         unit_select_text();
         std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
         std::cout << "Enter a number to select a unit: ";
-        unit = getch();
+        unit = getchar();
     }
 
     if(unit == '1') { return false; }     //return false if not metric
@@ -235,7 +235,7 @@ void bmi_() {
     if(exit == "y" || exit == "Y") { bmi_(); }*/
 
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
-    char exit = getch();
+    char exit = getchar();
     if(exit == 'y' || exit == 'Y') { bmi_(); }
 
 }

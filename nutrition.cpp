@@ -4,12 +4,12 @@
 
 #include <iostream>
 #include <string>
-#include <conio.h>
+#include <cstdio>
 #include "nutrition.h"
 
 //prints header of screen
 void print_top_NE() {
-    system("cls");
+    system("clear");
     std::cout << "NUTRITION & EXERCISE TIPS" << std::endl;
     std::cout << "This section will give you various exercise and nutrition tips to help you" << std::endl;
 }
@@ -77,7 +77,7 @@ void nutrition() {
     else if(input == "2") { e_tips(); }
     else { std::cerr << "ERROR: \"" << input << "\" is invalid" << std::endl; }*/
 
-    char input = getch();
+    char input = getchar();
     while(input != '1' && input != '2') {
         print_top_NE();
         std::cout << "\nWould you like to see exercise or nutrition tips?" << std::endl;
@@ -85,7 +85,7 @@ void nutrition() {
         std::cout << "2: Exercise Tips" << std::endl;
         std::cerr << "\nERROR: Not a valid input.  Please try again" << std::endl;
         std::cout << "Please enter a number: ";
-        input = getch();
+        input = getchar();
     }
 
     print_top_NE();
@@ -100,7 +100,7 @@ void nutrition() {
     if(exit == "y" || exit == "Y") { nutrition(); }*/
 
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
-    char exit = getch();
+    char exit = getchar();
     if(exit == 'y' || exit == 'Y') { nutrition(); }
 
 }

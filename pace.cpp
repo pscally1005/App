@@ -7,7 +7,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-#include <conio.h>
+#include <cstdio>
 #include "pace.h"
 
 typedef unsigned int uint;
@@ -24,7 +24,7 @@ bool units() {
 
     //if input is not correct
     while(unit_str != "1" && unit_str != "2") {
-        system("cls");
+        system("clear");
         print_header();
         print_units();
         std::cout << std::endl;
@@ -35,17 +35,17 @@ bool units() {
 
     unit = std::stoi(unit_str);*/
 
-    char unit = getch();
+    char unit = getchar();
     while(unit != '1' && unit != '2') {
         print_header();
         print_units();
         std::cout << std::endl;
         std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
         std::cout << "Enter a number to select a unit: ";
-        unit = getch();
+        unit = getchar();
     }
 
-    system("cls");
+    system("clear");
     print_header();
     print_units();
     std::cout << std::endl;
@@ -58,7 +58,7 @@ bool units() {
 //prints the first few lines of the output
 void print_header() {
 
-    system("cls");
+    system("clear");
     std::cout << "PACE CALCULATOR\n" << std::endl;
     std::cout << "This section will give you prompts to enter a distance, time, and pace" << std::endl;
     std::cout << "Enter 2 to calculate the third.  For the one you want to calculate, enter \"x\"\n" << std::endl;
@@ -96,7 +96,7 @@ float input_distance(bool is_metric) {
     //if input is improper (not a positive number)
     while(distance_str == "" || distance_str == "." || check_number(distance_str) == false || distance_str[0] == '0') {
 
-        system("cls");
+        system("clear");
         print_header();
         print_units();
         std::cout << "\nEnter a number to select a unit: ";
@@ -256,7 +256,7 @@ std::string input_pace(bool is_metric, float distance, std::string time) {
 //prints all above information up until distance
 void print_distance(bool is_metric, float distance) {
 
-    system("cls");
+    system("clear");
     print_header();
     print_units();
     std::cout << "\nEnter a number to select a unit: ";
@@ -504,7 +504,7 @@ void calculate_pace(bool is_metric, float distance, std::string time) {
 //pace main code
 void pace_calculator() {
 
-    system("cls");
+    system("clear");
 
     //statement at top of code
 	print_header();
@@ -535,7 +535,7 @@ void pace_calculator() {
     if(exit == "y" || exit == "Y") { pace_calculator(); }*/
 
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
-    char exit = getch();
+    char exit = getchar();
     if(exit == 'y' || exit == 'Y') { pace_calculator(); }
 
 }

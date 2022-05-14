@@ -9,7 +9,7 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
-#include <conio.h>
+#include <cstdio>
 #include "rate_log.h"
 #include "bmi.h"
 #include "nutrition.h"
@@ -23,7 +23,7 @@ void title() {
 
 	std::cout << "#####################" << std::endl;
 	std::cout << "#                   #" << std::endl;
-	std::cout << "# [ENTER NAME HERE] #" << std::endl;
+	std::cout << "# [Enter Name Here] #" << std::endl;
 	std::cout << "#                   #" << std::endl;
 	std::cout << "#####################" << std::endl;
 	std::cout << std::endl;
@@ -45,7 +45,7 @@ void options() {
 //prints the previous information from the main screen if screen input is invalid
 void print_prev_main() {
 
-	system("cls");
+	system("clear");
 	title();
 	options();
 
@@ -102,12 +102,12 @@ void print_prev_main() {
 	//return correct input to main
 	return num;*/
 
-	char input = getch();
+	char input = getchar();
 	while(input != 'x' && input != 'X' && input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
 		print_prev_main();
 		std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
 		std::cout << "Enter a number to select: ";
-		input = getch();
+		input = getchar();
 	}
 	return input;
 
@@ -116,50 +116,50 @@ void print_prev_main() {
 //main code
 int main(/*int argc, char* argv[]*/) {
 
-	system("cls");
-	system("cls");
+	system("clear");
+	system("clear");
 	title();
 	/*int*/ char select = screen_select();
 
 	//if user inputs 1 (rate_log)
 	if(select == '1') { 
 
-		system("cls");
+		system("clear");
 		rate_log();
 		main();
 
 	//if user inputs 2 (bmi)
 	} else if(select == '2') {
 
-		system("cls");
+		system("clear");
 		bmi_();
 		main();
 
 	//if user inputs 3 (exercise_tips)
 	} else if(select == '3') {
 
-		system("cls");
+		system("clear");
 		nutrition();
 		main();
 
 	//if the user inputs 4 (pace)
 	} else if(select == '4') {
 
-		system("cls");
+		system("clear");
 		pace_calculator();
 		main();
 
 	//if the user inputs 5 (splits)
 	} else if(select == '5') {
 
-		system("cls");
+		system("clear");
 		splits_();
 		main();
 
 	//if user inputs 0 (quit)
 	} else if(select == 'x' || select == 'X') {
 
-		system("cls");
+		system("clear");
 		return 1;
 
 	}

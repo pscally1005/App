@@ -8,7 +8,7 @@
 #include <fstream>
 #include <ctime>
 #include <sstream>
-#include <conio.h>
+#include <cstdio>
 #include "rate_log.h"
 
 typedef unsigned int uint;
@@ -16,7 +16,7 @@ typedef unsigned int uint;
 //prints the top header information
 void print_top_RL() {
 
-    system("cls");
+    system("clear");
     std::cout << "RATE MY NUTRITION\n" << std::endl;
     std::cout << "This section will let you rate your daily nutrition and why you feel this way.  The results will be saved to a log file\n" << std::endl;
 
@@ -66,12 +66,12 @@ void after_num(/*int*/ char num) {
     //returns correct input
 	return num;*/
 
-    char input = getch();
+    char input = getchar();
     while(input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
         print_top_RL();
         std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
-        input = getch();
+        input = getchar();
     }
     after_num(input);
     return input;
@@ -244,7 +244,7 @@ void rate_log() {
     if(exit == "y" || exit == "Y") { rate_log(); }*/
 
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
-    char exit = getch();
+    char exit = getchar();
     if(exit == 'y' || exit == 'Y') { rate_log(); }
 
 }
