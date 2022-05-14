@@ -52,13 +52,13 @@ void print_prev_main() {
 }
 
 //returns int of selected screen
-/*int*/ char screen_select() {
+int /*char*/ screen_select() {
 
 	//main screen options
 	options();
 	std::cout << "Enter a number to select: ";
 
-	/*std::string num_str;
+	std::string num_str;
 	std::getline(std::cin, num_str);
 	int num = -1;
 
@@ -100,16 +100,16 @@ void print_prev_main() {
 	std::cout << std::endl;
 
 	//return correct input to main
-	return num;*/
+	return num;
 
-	char input = getchar();
+	/*int input = getchar();
 	while(input != 'x' && input != 'X' && input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
 		print_prev_main();
 		std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
 		std::cout << "Enter a number to select: ";
 		input = getchar();
 	}
-	return input;
+	return input;*/
 
 }
 
@@ -119,45 +119,45 @@ int main(/*int argc, char* argv[]*/) {
 	system("clear");
 	system("clear");
 	title();
-	/*int*/ char select = screen_select();
+	int /*char*/ select = screen_select();
 
 	//if user inputs 1 (rate_log)
-	if(select == '1') { 
+	if(select == 1) { 
 
 		system("clear");
 		rate_log();
 		main();
 
 	//if user inputs 2 (bmi)
-	} else if(select == '2') {
+	} else if(select == 2) {
 
 		system("clear");
 		bmi_();
 		main();
 
 	//if user inputs 3 (exercise_tips)
-	} else if(select == '3') {
+	} else if(select == 3) {
 
 		system("clear");
 		nutrition();
 		main();
 
 	//if the user inputs 4 (pace)
-	} else if(select == '4') {
+	} else if(select == 4) {
 
 		system("clear");
 		pace_calculator();
 		main();
 
 	//if the user inputs 5 (splits)
-	} else if(select == '5') {
+	} else if(select == 5) {
 
 		system("clear");
 		splits_();
 		main();
 
-	//if user inputs 0 (quit)
-	} else if(select == 'x' || select == 'X') {
+	//if user inputs x (quit)
+	} else if(select == 0 /*select == 'x' || select == 'X'*/) {
 
 		system("clear");
 		return 1;

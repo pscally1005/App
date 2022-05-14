@@ -20,7 +20,7 @@ void e_tips();
 void n_tips();
 
 //reprints top with choice of nutrition of exercise tips
-void print_choice_NE(/*std::string*/ char str);
+void print_choice_NE(std::string /*char*/ str);
 
 //essentially main function for nutrition, code for the whole screen
 void nutrition();

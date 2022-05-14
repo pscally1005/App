@@ -23,7 +23,7 @@ void print_top_RL() {
 }
 
 //prints out header information up until after entering the num
-void after_num(/*int*/ char num) {
+void after_num(int /*char*/ num) {
 
     print_top_RL();
     std::cout << "Rate your nutrition today from 1 to 5: " << num << std::endl;
@@ -31,42 +31,26 @@ void after_num(/*int*/ char num) {
 }
 
 //enter a num from 1 to 5, return the inputted number or -1 if error
-/*int*/ char enter_num() {
+int /*char*/ enter_num() {
 
 	std::string num_str;
 	std::cout << "Rate your nutrition today from 1 to 5: ";
 
-	/*std::getline(std::cin, num_str);
+	std::getline(std::cin, num_str);
     int num = -1;
 
-    //if input is improper (not a number)
-    while(num_str == "" || check_number(num_str) == false) {
+    while(num_str != "1" && num_str != "2" && num_str != "3" && num_str != "4" && num_str != "5") {
         print_top_RL();
         std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again" << std::endl;
         std::cout << "Rate your nutrition today from 1 to 5: ";
         std::getline(std::cin, num_str);
     }
-
-    //converts input string to int
+    
     num = std::stoi(num_str);
-
-    //if input is improper (wrong number)
-    //also checks if input is a number
-    while(num < 1 || num > 5) {
-        print_top_RL();
-        std::cerr << "ERROR: \"" << num_str << "\" is not a proper input.  Please try again\n" << std::endl;
-        std::cout << "Rate your nutrition today from 1 to 5: ";
-        std::getline(std::cin, num_str);
-        if(num_str == "" || check_number(num_str) == false) { continue; }
-        num = std::stoi(num_str);
-    }
-
     after_num(num);
+	return num;
 
-    //returns correct input
-	return num;*/
-
-    char input = getchar();
+    /*char input = getchar();
     while(input != '1' && input != '2' && input != '3' && input != '4' && input != '5') {
         print_top_RL();
         std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
@@ -74,7 +58,8 @@ void after_num(/*int*/ char num) {
         input = getchar();
     }
     after_num(input);
-    return input;
+    return input;*/
+
 }
 
 //returns formatted date and time
@@ -224,7 +209,7 @@ void rate_log() {
     print_top_RL();
 	
 	//take number from enter_num()
-	/*int*/ char num = enter_num();
+	int /*char*/ num = enter_num();
 
 	//read in description of why day was rated as specific number
 	std::string str;;
@@ -238,13 +223,13 @@ void rate_log() {
   	file << return_date_time() << " " << num << ": " << str << std::endl;
   	file.close();
 
-    /*std::string exit;
+    std::string exit;
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     std::getline(std::cin, exit);
-    if(exit == "y" || exit == "Y") { rate_log(); }*/
+    if(exit == "y" || exit == "Y") { rate_log(); }
 
-    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    /*std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     char exit = getchar();
-    if(exit == 'y' || exit == 'Y') { rate_log(); }
+    if(exit == 'y' || exit == 'Y') { rate_log(); }*/
 
 }

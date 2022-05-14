@@ -22,7 +22,7 @@ bool check_number(std::string str);
 void after_num(int num);
 
 //enter a num from 1 to 5, return the inputted number or -1 if error
-/*int*/ char enter_num();
+int /*char*/ enter_num();
 
 //returns formatted date and time
 std::string return_date_time();

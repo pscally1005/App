@@ -18,7 +18,7 @@ bool units() {
     print_units();
     std::cout << "\nEnter a number to select a unit: ";
 
-    /*std::string unit_str;
+    std::string unit_str;
     std::getline(std::cin, unit_str);
     int unit = -1;
 
@@ -33,9 +33,9 @@ bool units() {
         std::getline(std::cin, unit_str);
     }
 
-    unit = std::stoi(unit_str);*/
+    unit = std::stoi(unit_str);
 
-    char unit = getchar();
+    /*char unit = getchar();
     while(unit != '1' && unit != '2') {
         print_header();
         print_units();
@@ -43,7 +43,7 @@ bool units() {
         std::cerr << "ERROR: Not a proper input.  Please try again" << std::endl;
         std::cout << "Enter a number to select a unit: ";
         unit = getchar();
-    }
+    }*/
 
     system("clear");
     print_header();
@@ -51,8 +51,9 @@ bool units() {
     std::cout << std::endl;
     std::cout << "Enter a number to select a unit: " << unit << "\n" << std::endl;
 
-    if(unit == '1') { return false; }     //return false if not metric
+    if(unit == 1) { return false; }     //return false if not metric
     else { return true; }               //return true if metric
+
 }
 
 //prints the first few lines of the output
@@ -529,13 +530,13 @@ void pace_calculator() {
         std::cerr << "ERROR: No \"x\" was entered.";
     }
 
-    /*std::string exit;
+    std::string exit;
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     std::getline(std::cin, exit);
-    if(exit == "y" || exit == "Y") { pace_calculator(); }*/
+    if(exit == "y" || exit == "Y") { pace_calculator(); }
 
-    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    /*std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     char exit = getchar();
-    if(exit == 'y' || exit == 'Y') { pace_calculator(); }
+    if(exit == 'y' || exit == 'Y') { pace_calculator(); }*/
 
 }

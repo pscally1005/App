@@ -15,7 +15,7 @@ void print_top_NE() {
 }
 
 //reprints top with choice of nutrition of exercise tips
-void print_choice_NE(/*std::string*/ char str) {
+void print_choice_NE(std::string /*char*/ str) {
     print_top_NE();
 
     std::cout << "\nWould you like to see exercise or nutrition tips?" << std::endl;
@@ -57,7 +57,7 @@ void nutrition() {
     std::cout << "2: Exercise Tips" << std::endl;
     std::cout << "\nPlease enter a number: ";
     
-    /*std::string input;
+    std::string input;
     std::getline(std::cin, input);
 
     while(input != "1" && input != "2") {
@@ -75,9 +75,9 @@ void nutrition() {
 
     if(input == "1") { n_tips(); }
     else if(input == "2") { e_tips(); }
-    else { std::cerr << "ERROR: \"" << input << "\" is invalid" << std::endl; }*/
+    else { std::cerr << "Achievement unlocked: How did we get here?" << std::endl; }
 
-    char input = getchar();
+    /*char input = getchar();
     while(input != '1' && input != '2') {
         print_top_NE();
         std::cout << "\nWould you like to see exercise or nutrition tips?" << std::endl;
@@ -92,15 +92,15 @@ void nutrition() {
     print_choice_NE(input);
     if(input == '1') { n_tips(); }
     else if(input == '2') { e_tips(); }
-    else { std::cerr << "Achievement unlocked: How did we get here?" << std::endl; }
+    else { std::cerr << "Achievement unlocked: How did we get here?" << std::endl; }*/
 
-    /*std::string exit;
+    std::string exit;
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     std::getline(std::cin, exit);
-    if(exit == "y" || exit == "Y") { nutrition(); }*/
+    if(exit == "y" || exit == "Y") { nutrition(); }
 
-    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    /*std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     char exit = getchar();
-    if(exit == 'y' || exit == 'Y') { nutrition(); }
+    if(exit == 'y' || exit == 'Y') { nutrition(); }*/
 
 }

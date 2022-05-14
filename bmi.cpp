@@ -46,7 +46,7 @@ bool check_metric_BMI() {
     unit_select_text();
     std::cout << "Enter a number to select a unit: ";
 
-    /*std::string unit_str;
+    std::string unit_str;
     std::getline(std::cin, unit_str);
     int unit = -1;
 
@@ -61,11 +61,10 @@ bool check_metric_BMI() {
 
     unit = std::stoi(unit_str);
     std::cout << std::endl;
-
     if(unit == 1) { return false; }     //return false if not metric
-    else { return true; }               //return true if metric*/
+    else { return true; }               //return true if metric
 
-    char unit = getchar();
+    /*char unit = getchar();
     while(unit != '1' && unit != '2') {
         print_top_BMI();
         unit_select_text();
@@ -226,16 +225,13 @@ void bmi_() {
     else if(bmi >= 25 && bmi < 30) { std::cout << "You are in the overweight weight range" << std::endl; }
     else { std::cout << "You are in the obese weight range" << std::endl; }
 
-    /*bool back = back_to_main_screen_b(is_metric, h, w, bmi, digits);
-    if(back == false) { bmi_(); }*/
-
-    /*std::string exit;
+    std::string exit;
     std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     std::getline(std::cin, exit);
-    if(exit == "y" || exit == "Y") { bmi_(); }*/
+    if(exit == "y" || exit == "Y") { bmi_(); }
 
-    std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
+    /*std::cout << "\nEnter \"Y\" to stay on the current screen, or anything else to return to the main menu: ";
     char exit = getchar();
-    if(exit == 'y' || exit == 'Y') { bmi_(); }
+    if(exit == 'y' || exit == 'Y') { bmi_(); }*/
 
 }
